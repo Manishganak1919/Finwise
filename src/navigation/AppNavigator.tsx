@@ -11,6 +11,8 @@ import MobileNumberScreen from '../screens/Auth/MobileNumberScreen';
 import OtpVerificationScreen from '../screens/Auth/OtpVerificationScreen';
 import OnboardOne from '../screens/Auth/OnboardOne'; // Fixed import (case-sensitive)
 import OnboardTwo from '../screens/Auth/OnboardTwo';
+import Signup from '../screens/Auth/SignUp';
+import SignIn from '../screens/Auth/SignIn';
 
 /* Initialize Navigators */
 const Stack = createStackNavigator();
@@ -34,6 +36,8 @@ const AppNavigator = () => {
         <Stack.Screen name="OnboardingMain" component={OnboardingScreen} />
         <Stack.Screen name="OnboardingOne" component={OnboardOne} />
         <Stack.Screen name="OnboardingTwo" component={OnboardTwo} />
+        <Stack.Screen name="Signup" component={Signup} />
+        <Stack.Screen name="SignIn" component={SignIn} />
         <Stack.Screen name="MobileNumber" component={MobileNumberScreen} />
         <Stack.Screen
           name="OtpVerification"

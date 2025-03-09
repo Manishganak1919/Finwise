@@ -1,3 +1,5 @@
+import {useNavigation} from '@react-navigation/native';
+import {StackNavigationProp} from '@react-navigation/stack';
 import React from 'react';
 import {
   View,
@@ -8,8 +10,16 @@ import {
   useWindowDimensions,
 } from 'react-native';
 
+type RootStackParamList = {
+  OnboardingTwo: undefined;
+  Signup: undefined;
+};
+
+type NavigationProps = StackNavigationProp<RootStackParamList, 'OnboardingTwo'>;
+
 const OnboardTwo: React.FC = () => {
   const {width, height} = useWindowDimensions();
+  const navigation = useNavigation<NavigationProps>();
 
   return (
     <View style={styles.container}>
@@ -33,7 +43,9 @@ const OnboardTwo: React.FC = () => {
           </View>
 
           {/* Next Button */}
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => navigation.navigate('Signup')}>
             <Text style={[styles.buttonText, {fontSize: width * 0.045}]}>
               Next
             </Text>
@@ -53,7 +65,7 @@ const OnboardTwo: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#00C08B',
+    backgroundColor: '#00D09E',
   },
   headingContainer: {
     alignItems: 'center',
@@ -86,10 +98,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   imageContainer: {
-    width: '50%', // Smaller size
+    width: '50%',
     aspectRatio: 1,
     backgroundColor: '#EAF8F0',
-    borderRadius: 100, // More rounded
+    borderRadius: 100,
     alignItems: 'center',
     justifyContent: 'center',
     padding: 15,
@@ -97,11 +109,11 @@ const styles = StyleSheet.create({
   image: {
     width: '100%',
     height: undefined,
-    aspectRatio: 1, // Maintain aspect ratio
-    borderRadius: 100, // Rounded edges
+    aspectRatio: 1,
+    borderRadius: 100,
   },
   button: {
-    backgroundColor: '#00C08B',
+    backgroundColor: '#00D09E',
     borderRadius: 25,
     paddingVertical: 12,
     paddingHorizontal: 50,

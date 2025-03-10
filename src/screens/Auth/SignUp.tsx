@@ -14,6 +14,7 @@ import {
   StatusBar,
   ActivityIndicator,
 } from 'react-native';
+import CustomDatePicker from '../../components/CustomDatePicker';
 
 type RootStackParamList = {
   OnboardingOne: undefined;
@@ -27,6 +28,7 @@ const Signup: React.FC = () => {
   const {width} = useWindowDimensions();
   const navigation = useNavigation<NavigationProps>();
 
+  const [selected, setSelected] = useState<Date | null>(null);
   // Form State
   const [form, setForm] = useState({
     fullname: '',
@@ -48,6 +50,16 @@ const Signup: React.FC = () => {
 
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+
+  // Labels Mapping
+  const labels: Record<string, string> = {
+    fullname: 'Full Name',
+    email: 'Email',
+    mobileno: 'Mobile No.',
+    dateofbirth: 'Date of Birth',
+    password: 'Password',
+    confirmPassword: 'Confirm Password',
+  };
 
   // Handle Input Change
   const handleChange = (key: keyof typeof form, value: string) => {
@@ -141,35 +153,36 @@ const Signup: React.FC = () => {
         </View>
 
         <View style={styles.whiteBackground}>
-          {[
-            'fullname',
-            'email',
-            'mobileno',
-            'dateofbirth',
-            'password',
-            'confirmPassword',
-          ].map(key => (
+          {Object.keys(form).map(key => (
             <View
               key={key}
               style={[styles.inputContainer, {width: width * 0.83}]}>
-              <Text style={styles.label}>
-                {key === 'confirmPassword'
-                  ? 'Confirm Password'
-                  : key.charAt(0).toUpperCase() + key.slice(1)}
-              </Text>
-              <TextInput
-                style={[
-                  styles.input,
-                  errors[key as keyof typeof errors] && styles.inputError,
-                ]}
-                placeholder={`Enter your ${key}`}
-                secureTextEntry={key.includes('password')}
-                keyboardType={key === 'mobileno' ? 'phone-pad' : 'default'}
-                value={form[key as keyof typeof form]}
-                onChangeText={text =>
-                  handleChange(key as keyof typeof form, text)
-                }
-              />
+              <Text style={styles.label}>{labels[key]}</Text>
+              {key === 'dateofbirth' ? (
+                <CustomDatePicker
+                  selectedDate={
+                    form.dateofbirth ? new Date(form.dateofbirth) : null
+                  } // Convert string to Date
+                  onDateChange={date =>
+                    handleChange('dateofbirth', date.toISOString())
+                  } // Convert Date to string
+                />
+              ) : (
+                <TextInput
+                  style={[
+                    styles.input,
+                    errors[key as keyof typeof errors] && styles.inputError,
+                  ]}
+                  placeholder={`Enter your ${labels[key]}`}
+                  placeholderTextColor="#A9A9A9"
+                  secureTextEntry={key.includes('password')}
+                  keyboardType={key === 'mobileno' ? 'phone-pad' : 'default'}
+                  value={form[key as keyof typeof form]}
+                  onChangeText={text =>
+                    handleChange(key as keyof typeof form, text)
+                  }
+                />
+              )}
             </View>
           ))}
 

@@ -13,6 +13,9 @@ import OnboardOne from '../screens/Auth/OnboardOne'; // Fixed import (case-sensi
 import OnboardTwo from '../screens/Auth/OnboardTwo';
 import Signup from '../screens/Auth/SignUp';
 import SignIn from '../screens/Auth/SignIn';
+import ForgetPassword from '../screens/Auth/ForgetPassword';
+import SecurityPin from '../screens/Auth/SecurityPin';
+import SuccessfulVerify from '../screens/Auth/Successfullverify';
 
 /* Initialize Navigators */
 const Stack = createStackNavigator();
@@ -38,6 +41,9 @@ const AppNavigator = () => {
         <Stack.Screen name="OnboardingTwo" component={OnboardTwo} />
         <Stack.Screen name="Signup" component={Signup} />
         <Stack.Screen name="SignIn" component={SignIn} />
+        <Stack.Screen name="forgetpassword" component={ForgetPassword} />
+        <Stack.Screen name="securitypin" component={SecurityPin} />
+        <Stack.Screen name="successfulverify" component={SuccessfulVerify} />
         <Stack.Screen name="MobileNumber" component={MobileNumberScreen} />
         <Stack.Screen
           name="OtpVerification"

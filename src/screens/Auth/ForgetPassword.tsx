@@ -24,7 +24,7 @@ type RootStackParamList = {
 
 type NavigationProps = StackNavigationProp<RootStackParamList, 'OnboardingOne'>;
 
-const SignIn: React.FC = () => {
+const ForgetPassword: React.FC = () => {
   const {width} = useWindowDimensions();
   const navigation = useNavigation<NavigationProps>();
 
@@ -207,7 +207,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: '100%',
   },
-  inputContainer: {marginBottom: 12, marginTop:20},
+  inputContainer: {marginBottom: 12, marginTop: 20},
   label: {
     fontSize: 14,
     fontWeight: '600',
@@ -257,4 +257,4 @@ const styles = StyleSheet.create({
   boldText: {fontWeight: 'bold'},
 });
 
-export default SignIn;
+export default ForgetPassword;

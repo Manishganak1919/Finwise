@@ -24,7 +24,7 @@ type RootStackParamList = {
 
 type NavigationProps = StackNavigationProp<RootStackParamList, 'OnboardingOne'>;
 
-const SignIn: React.FC = () => {
+const SecurityPin: React.FC = () => {
   const {width} = useWindowDimensions();
   const navigation = useNavigation<NavigationProps>();
 
@@ -257,4 +257,4 @@ const styles = StyleSheet.create({
   boldText: {fontWeight: 'bold'},
 });
 
-export default SignIn;
+export default SecurityPin;

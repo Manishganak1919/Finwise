@@ -2,6 +2,8 @@ import React, {useState, useEffect, useMemo} from 'react';
 import {StyleSheet, View, useWindowDimensions, StatusBar} from 'react-native';
 import LottieView from 'lottie-react-native';
 import {NavigationContainer} from '@react-navigation/native';
+import {Provider} from 'react-redux';
+import {store} from './src/redux/store';
 import AppNavigator from './src/navigation/AppNavigator';
 
 const App = () => {
@@ -30,10 +32,7 @@ const App = () => {
           translucent
           barStyle="light-content"
         /> */}
-         <StatusBar
-          backgroundColor="#ffffff"
-          barStyle="dark-content"
-        />
+        <StatusBar backgroundColor="#ffffff" barStyle="dark-content" />
         <LottieView
           source={backgroundAnimation}
           autoPlay
@@ -48,9 +47,11 @@ const App = () => {
   }
 
   return (
-    <NavigationContainer>
-      <AppNavigator />
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <AppNavigator />
+      </NavigationContainer>
+    </Provider>
   );
 };
 

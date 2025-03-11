@@ -16,6 +16,8 @@ import SignIn from '../screens/Auth/SignIn';
 import ForgetPassword from '../screens/Auth/ForgetPassword';
 import SecurityPin from '../screens/Auth/SecurityPin';
 import SuccessfulVerify from '../screens/Auth/Successfullverify';
+import EmailVerify from '../screens/Auth/Emailverify';
+import MobileVerify from '../screens/Auth/Mobileverify';
 
 /* Initialize Navigators */
 const Stack = createStackNavigator();
@@ -39,6 +41,8 @@ const AppNavigator = () => {
         <Stack.Screen name="OnboardingMain" component={OnboardingScreen} />
         <Stack.Screen name="OnboardingOne" component={OnboardOne} />
         <Stack.Screen name="OnboardingTwo" component={OnboardTwo} />
+        <Stack.Screen name="Emailverify" component={EmailVerify} />
+        <Stack.Screen name="Mobileverify" component={MobileVerify} />
         <Stack.Screen name="Signup" component={Signup} />
         <Stack.Screen name="SignIn" component={SignIn} />
         <Stack.Screen name="forgetpassword" component={ForgetPassword} />

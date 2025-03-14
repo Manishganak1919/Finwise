@@ -1,6 +1,6 @@
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -15,6 +15,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import CustomDatePicker from '../../components/CustomDatePicker';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 type RootStackParamList = {
   OnboardingOne: undefined;
@@ -27,6 +28,7 @@ type NavigationProps = StackNavigationProp<RootStackParamList, 'OnboardingOne'>;
 const Signup: React.FC = () => {
   const {width} = useWindowDimensions();
   const navigation = useNavigation<NavigationProps>();
+  console.log(AsyncStorage.getItem('userEmail'));
 
   const [selected, setSelected] = useState<Date | null>(null);
   // Form State
@@ -50,6 +52,20 @@ const Signup: React.FC = () => {
 
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+
+  useEffect(() => {
+    const loadEmail = async () => {
+      try {
+        const storedEmail = await AsyncStorage.getItem('userEmail');
+        if (storedEmail) {
+          setForm(prevForm => ({...prevForm, email: storedEmail}));
+        }
+      } catch (error) {
+        console.error('Failed to load email from storage:', error);
+      }
+    };
+    loadEmail();
+  }, []);
 
   // Labels Mapping
   const labels: Record<string, string> = {
@@ -181,6 +197,7 @@ const Signup: React.FC = () => {
                   onChangeText={text =>
                     handleChange(key as keyof typeof form, text)
                   }
+                  editable={key !== "email"}
                 />
               )}
             </View>

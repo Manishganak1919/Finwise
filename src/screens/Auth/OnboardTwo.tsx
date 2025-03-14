@@ -13,6 +13,7 @@ import {
 type RootStackParamList = {
   OnboardingTwo: undefined;
   Emailverify: undefined;
+  HomeTabs:undefined;
 };
 
 type NavigationProps = StackNavigationProp<RootStackParamList, 'OnboardingTwo'>;
@@ -45,7 +46,7 @@ const OnboardTwo: React.FC = () => {
           {/* Next Button */}
           <TouchableOpacity
             style={styles.button}
-            onPress={() => navigation.navigate('Emailverify')}>
+            onPress={() => navigation.navigate('HomeTabs')}>
             <Text style={[styles.buttonText, {fontSize: width * 0.045}]}>
               Next
             </Text>

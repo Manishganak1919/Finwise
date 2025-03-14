@@ -12,6 +12,8 @@
   "dependencies": {
     "@hugeicons/react-native": "^1.0.3",
     "@react-native-async-storage/async-storage": "^2.1.2",
+    "@react-native-firebase/app": "^21.12.0",
+    "@react-native-firebase/firestore": "^21.12.0",
     "@react-navigation/bottom-tabs": "^7.2.1",
     "@react-navigation/drawer": "^7.1.2",
     "@react-navigation/native": "^7.0.15",

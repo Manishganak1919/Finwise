@@ -19,13 +19,13 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 type RootStackParamList = {
   HomeTabs: undefined;
   OnboardingTwo: undefined;
-  Signup: undefined;
+  SignIn: undefined;
   forgetpassword: undefined;
 };
 
 type NavigationProps = StackNavigationProp<RootStackParamList, 'HomeTabs'>;
 
-const SignIn: React.FC = () => {
+const SetNewPassword: React.FC = () => {
   const {width} = useWindowDimensions();
   const navigation = useNavigation<NavigationProps>();
 
@@ -101,25 +101,41 @@ const SignIn: React.FC = () => {
         contentContainerStyle={styles.scrollContainer}
         keyboardShouldPersistTaps="handled">
         <View style={styles.headingContainer}>
-          <Text style={styles.headingTitle}>Sign In</Text>
+          <Text style={styles.headingTitle}>New Password</Text>
         </View>
 
         <View style={styles.whiteBackground}>
           {/* Input Fields */}
+         
           <View style={[styles.inputContainer, {width: width * 0.83}]}>
-            <Text style={styles.label}>Email</Text>
-            <TextInput
-              style={[styles.input, errors.email && styles.inputError]}
-              placeholder="Enter your email"
-              placeholderTextColor="#A9A9A9"
-              keyboardType="email-address"
-              value={form.email}
-              onChangeText={text => handleChange('email', text)}
-            />
+            <Text style={styles.label}>New Password</Text>
+            <View
+              style={[
+                styles.passwordContainer,
+                errors.password && styles.inputError,
+              ]}>
+              <TextInput
+                style={[styles.passwordInput]}
+                placeholder="Enter your password"
+                placeholderTextColor="#A9A9A9"
+                secureTextEntry={!passwordVisible}
+                value={form.password}
+                onChangeText={text => handleChange('password', text)}
+              />
+              <TouchableOpacity
+                onPress={() => setPasswordVisible(!passwordVisible)}>
+                <FontAwesome
+                  name={passwordVisible ? 'eye' : 'eye-slash'}
+                  size={20}
+                  color="#000"
+                  style={styles.eyeIcon}
+                />
+              </TouchableOpacity>
+            </View>
           </View>
 
           <View style={[styles.inputContainer, {width: width * 0.83}]}>
-            <Text style={styles.label}>Password</Text>
+            <Text style={styles.label}>Confirm New Password</Text>
             <View
               style={[
                 styles.passwordContainer,
@@ -170,7 +186,7 @@ const SignIn: React.FC = () => {
 
             <TouchableOpacity
               style={[styles.Signupbutton, loading && styles.buttonDisabled]}
-              onPress={() => navigation.navigate('Signup')}
+            //   onPress={() => navigation.navigate('Signup')}
               disabled={loading}>
               {loading ? (
                 <ActivityIndicator color="#fff" />
@@ -260,4 +276,4 @@ const styles = StyleSheet.create({
   boldText: {fontWeight: 'bold'},
 });
 
-export default SignIn;
+export default SetNewPassword;

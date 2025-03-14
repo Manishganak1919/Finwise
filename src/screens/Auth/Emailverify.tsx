@@ -12,24 +12,23 @@ import {
   useWindowDimensions,
   StatusBar,
 } from 'react-native';
-import { RootState } from '../../redux/store';
-import { useSelector, useDispatch } from "react-redux";
-import { setEmailVerified } from '../../redux/slices/userSlice';
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { StackNavigationProp } from '@react-navigation/stack';
-import { useNavigation } from '@react-navigation/native';
+import {RootState} from '../../redux/store';
+import {useSelector, useDispatch} from 'react-redux';
+import {setEmailVerified} from '../../redux/slices/userSlice';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {useNavigation} from '@react-navigation/native';
 
 type RootStackParamList = {
   OnboardingOne: undefined;
   OnboardingTwo: undefined;
-  Mobileverify: undefined;
+  Signup: undefined;
 };
 
 type NavigationProps = StackNavigationProp<RootStackParamList, 'OnboardingOne'>;
 
-
 const EmailVerify: React.FC = () => {
-  const { width, height } = useWindowDimensions();
+  const {width, height} = useWindowDimensions();
   const navigation = useNavigation<NavigationProps>();
   const [email, setEmail] = useState('');
   const [otp, setOtp] = useState(['', '', '', '', '', '']);
@@ -49,7 +48,9 @@ const EmailVerify: React.FC = () => {
   const otpRefs = useRef<TextInput[]>([]);
   const dispatch = useDispatch();
 
-  const isEmailVerified = useSelector((state: RootState) => state.user.isEmailVerified);
+  const isEmailVerified = useSelector(
+    (state: RootState) => state.user.isEmailVerified,
+  );
 
   useEffect(() => {
     if (step === 'otp') {
@@ -78,6 +79,13 @@ const EmailVerify: React.FC = () => {
   const sendOtp = async () => {
     if (!email.trim()) {
       setErrorMessage('Please enter your email.');
+      return;
+    }
+
+    // Email validation using regex
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setErrorMessage('Please enter a valid email address.');
       return;
     }
 
@@ -138,8 +146,8 @@ const EmailVerify: React.FC = () => {
       if (response.ok && data.status === 200) {
         setSuccessMessage('OTP Verified Successfully!');
         dispatch(setEmailVerified(true));
-        navigation.navigate('Mobileverify');
-        // await AsyncStorage.setItem('userEmail', email);
+        navigation.navigate('Signup');
+        await AsyncStorage.setItem('userEmail', email);
       } else {
         setErrorMessage(data.message || 'Invalid OTP. Try again.');
         setOtpError([true, true, true, true, true, true]);
@@ -363,7 +371,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     textAlign: 'center',
     marginTop: 8,
-    marginBottom:14,
+    marginBottom: 14,
     paddingHorizontal: 6,
     paddingVertical: 2,
     backgroundColor: '#FEE2E2',

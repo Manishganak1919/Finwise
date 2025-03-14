@@ -1,7 +1,7 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import {View, StyleSheet} from 'react-native';
 
-const HomeScreen: React.FC = () => {
+const ProfileScreen: React.FC = () => {
   return (
     <View style={styles.container}>
       {/* Heading Section */}
@@ -28,4 +28,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HomeScreen;
+export default ProfileScreen;

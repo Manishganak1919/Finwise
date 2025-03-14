@@ -16,6 +16,7 @@ import SignUp from '../screens/Auth/SignUp';
 import OnboardOne from '../screens/Auth/OnboardOne';
 import OnboardTwo from '../screens/Auth/OnboardTwo';
 import AddExpense from '../screens/Home/AddExpense';
+import AddIncome from '../screens/Home/AddIncome';
 
 /* Initialize Navigators */
 const Stack = createStackNavigator();
@@ -103,6 +104,7 @@ const AppNavigator = () => {
         <Stack.Screen name="Onboarding" component={OnboardingScreen} />
         <Stack.Screen name="OnboardingOne" component={OnboardOne} />
         <Stack.Screen name="OnboardingTwo" component={OnboardTwo} />
+        <Stack.Screen name="AddIncome" component={AddIncome} />
         <Stack.Screen name="SignIn" component={SignIn} />
         <Stack.Screen name="SignUp" component={SignUp} />
         <Stack.Screen name="HomeTabs" component={BottomTabs} />

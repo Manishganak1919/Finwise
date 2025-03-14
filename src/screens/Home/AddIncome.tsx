@@ -29,7 +29,7 @@ type RootStackParamList = {
 
 type NavigationProps = StackNavigationProp<RootStackParamList, 'HomeTabs'>;
 
-const AddExpense: React.FC = () => {
+const AddIncome: React.FC = () => {
   const {height, width} = useWindowDimensions();
   const WHITE_BG_HEIGHT = height * 0.85;
   const INPUT_WIDTH = width * 0.74;
@@ -170,7 +170,7 @@ const AddExpense: React.FC = () => {
           <View style={styles.container}>
             {/* Page Heading */}
             <View style={styles.headingContainer}>
-              <Text style={styles.headingTitle}>Add Expenses</Text>
+              <Text style={styles.headingTitle}>Add Income</Text>
             </View>
 
             {/* White Background Section */}
@@ -492,4 +492,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AddExpense;
+export default AddIncome;

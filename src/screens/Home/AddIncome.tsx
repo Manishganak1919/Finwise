@@ -43,8 +43,6 @@ const AddIncome: React.FC = () => {
   const [categoryModalVisible, setCategoryModalVisible] = useState(false);
   const [searchText, setSearchText] = useState('');
   const [amount, setAmount] = useState('');
-  const [expenseTitle, setExpenseTitle] = useState('');
-  const [description, setDescription] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
@@ -83,14 +81,6 @@ const AddIncome: React.FC = () => {
     setSearchText('');
   }, []);
 
-  // ✅ Expense Title Validation: Must start with a letter and contain only alphabets
-  const validateExpenseTitle = (text: string) => {
-    const titleRegex = /^[A-Za-z]+(?:\s[A-Za-z]+)*$/; // Allows only alphabets and spaces
-    if (text === '' || titleRegex.test(text)) {
-      setExpenseTitle(text);
-    }
-  };
-
   // ✅ Automatically format amount with ₹ symbol and allow only valid numbers
   const handleAmountChange = (text: string) => {
     const formattedText = text.replace(/[^\d.]/g, ''); // Remove non-numeric characters except .
@@ -105,15 +95,8 @@ const AddIncome: React.FC = () => {
     const titleRegex = /^[A-Za-z]+(?:\s[A-Za-z]+)*$/;
     const amountRegex = /^[0-9]+(\.[0-9]{1,2})?$/;
 
-    if (!expenseTitle || !amount || !selectedCategory) {
+    if (!amount || !selectedCategory) {
       setErrorMessage('Please fill in all required fields.');
-      return;
-    }
-
-    if (!titleRegex.test(expenseTitle.trim())) {
-      setErrorMessage(
-        'Expense Title must start with an alphabet and contain only alphabets.',
-      );
       return;
     }
 
@@ -125,10 +108,9 @@ const AddIncome: React.FC = () => {
 
     const expenseData = {
       userId: '67cdd972b76432efa9a23101',
-      title: expenseTitle,
+
       amount: parseFloat(numericAmount),
       category: selectedCategory,
-      description: description || '',
     };
 
     try {
@@ -148,10 +130,8 @@ const AddIncome: React.FC = () => {
 
       if (response.ok && result.statusCode === 200) {
         setErrorMessage('Expense added successfully!');
-        setExpenseTitle('');
         setAmount('');
         setSelectedCategory('');
-        setDescription('');
       } else {
         setErrorMessage(result.message || 'Failed to add expense.');
       }
@@ -208,15 +188,6 @@ const AddIncome: React.FC = () => {
                   </TouchableOpacity>
                 </View>
 
-                {/* Expense Title Input */}
-                <TextInput
-                  style={[styles.inputContainer, {width: INPUT_WIDTH}]}
-                  placeholder="Expense Title"
-                  value={expenseTitle}
-                  onChangeText={validateExpenseTitle}
-                  placeholderTextColor="#666"
-                />
-
                 {/* Amount Input */}
                 <TextInput
                   style={[styles.inputContainer, {width: INPUT_WIDTH}]}
@@ -224,19 +195,6 @@ const AddIncome: React.FC = () => {
                   keyboardType="numeric"
                   value={amount}
                   onChangeText={handleAmountChange}
-                  placeholderTextColor="#666"
-                />
-
-                {/* Description Input */}
-                <TextInput
-                  style={[
-                    styles.inputContainer,
-                    {width: INPUT_WIDTH, height: 80},
-                  ]}
-                  placeholder="Description"
-                  multiline
-                  value={description}
-                  onChangeText={setDescription}
                   placeholderTextColor="#666"
                 />
 
@@ -249,11 +207,10 @@ const AddIncome: React.FC = () => {
                 <TouchableOpacity
                   style={[
                     styles.saveButton,
-                    (!expenseTitle || !amount || !selectedCategory) &&
-                      styles.disabledButton,
+                    (!amount || !selectedCategory) && styles.disabledButton,
                   ]}
                   onPress={handleSaveExpense}
-                  disabled={!expenseTitle || !amount || !selectedCategory}>
+                  disabled={!amount || !selectedCategory}>
                   <Text style={styles.saveButtonText}>Save</Text>
                 </TouchableOpacity>
 

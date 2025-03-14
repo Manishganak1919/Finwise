@@ -170,7 +170,7 @@ const AddExpense: React.FC = () => {
           <View style={styles.container}>
             {/* Page Heading */}
             <View style={styles.headingContainer}>
-              <Text style={styles.headingTitle}>Add Expenses</Text>
+              <Text style={styles.headingTitle}>Add Income</Text>
             </View>
 
             {/* White Background Section */}
